@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState({ emailInput: '', pwInput: '' });
 
   const handleInputValue = (e) => {
@@ -25,7 +27,8 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        localStorage.setItem('token', res.access_token);
+        navigate('/todo');
       });
   };
 
