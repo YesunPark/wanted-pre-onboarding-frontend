@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
@@ -8,23 +8,39 @@ import BoxStyle from '../../../styles/Box.style';
 const ListItem = ({ list, setListArr }) => {
   const { id, todo, isCompleted, userId } = list;
   const [checked, setChecked] = useState('no-checked');
-  const [inputContent, setInputContent] = useState(todo);
+  const [input, setInput] = useState(todo);
+  const [modifyingInput, setModifyingInput] = useState(todo);
   const [isModifying, setIsModifying] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef.current !== null) inputRef.current.focus();
+  }, [isModifying]);
+
+  function handleInput(e) {
+    setModifyingInput(e.target.value);
+  }
 
   return (
     <ListContainer id={checked}>
       <BoxStyle className='list-item'>
         <div className='checkbox'>
           <FontAwesomeIcon icon={faSquareCheck} className='icon' />
-          <input
-            type='text'
-            className={`content ${checked} ${isModifying && 'modifying'}`}
-            value={inputContent}
-            autoComplete='off'
-            size={20}
-            maxLength={12}
-            spellCheck='false'
-          />
+          {!isModifying && <input defaultValue={input} disabled={true} />}
+          {isModifying && (
+            <input
+              ref={inputRef}
+              type='text'
+              className={`content ${checked} ${isModifying && 'modifying'}`}
+              value={modifyingInput}
+              onChange={handleInput}
+              disabled={isModifying ? false : true}
+              autoComplete='off'
+              size={20}
+              maxLength={12}
+              spellCheck='false'
+            />
+          )}
         </div>
         {!isModifying && (
           <div>
@@ -37,13 +53,24 @@ const ListItem = ({ list, setListArr }) => {
           </div>
         )}
         {isModifying && (
-          <button
-            className='save-modify'
-            onClick={() => {
-              setIsModifying(false);
-            }}>
-            수정완료
-          </button>
+          <div>
+            <button
+              className='save-modify'
+              onClick={() => {
+                setModifyingInput(input);
+                setIsModifying(false);
+              }}>
+              취소
+            </button>
+            <button
+              className='save-modify'
+              onClick={() => {
+                setInput(modifyingInput);
+                setIsModifying(false);
+              }}>
+              제출
+            </button>
+          </div>
         )}
       </BoxStyle>
     </ListContainer>
@@ -69,9 +96,10 @@ const ListContainer = styled.div`
     margin: 0px 20px 0px 0px;
   }
   .save-modify {
+    height: 40px;
     padding: 0px;
-    margin: 0px 15px 0px 0px;
-    font-size: 18px;
+    margin-right: 15px;
+    font-size: 16px;
     &:hover {
       cursor: pointer;
     }

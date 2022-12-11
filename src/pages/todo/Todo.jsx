@@ -4,7 +4,7 @@ import Title from './components/Title';
 import ListItem from './components/ListItem';
 
 const ToDo = () => {
-  const [listArr, setListArr] = useState([{ todo: 'hi' }]);
+  const [listArr, setListArr] = useState([{ id: 1, todo: 'hi' }]);
 
   return (
     <TodoContainer>
