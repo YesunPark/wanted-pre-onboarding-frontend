@@ -3,13 +3,30 @@ import styled from 'styled-components';
 
 const Signup = () => {
   const [input, setInput] = useState({ emailInput: '', pwInput: '' });
-  console.log(input);
+
   const handleInputValue = (e) => {
     const { name, value } = e.target;
     setInput({
       ...input,
       [name]: value,
     });
+  };
+
+  const clickSignupBtn = () => {
+    fetch('https://pre-onboarding-selection-task.shop/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: input.emailInput,
+        password: input.pwInput,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
@@ -26,7 +43,7 @@ const Signup = () => {
         value={input.pwInput}
         onChange={handleInputValue}
       />
-      <button>회원가입하기</button>
+      <button onClick={clickSignupBtn}>회원가입하기</button>
     </SignupContainer>
   );
 };
