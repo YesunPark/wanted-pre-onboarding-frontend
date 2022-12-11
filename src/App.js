@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Todo from './pages/Todo';
+import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
+import Todo from './pages/todo/Todo';
 
 const App = () => {
   return (
