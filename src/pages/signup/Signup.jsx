@@ -22,11 +22,7 @@ const Signup = () => {
         email: input.emailInput,
         password: input.pwInput,
       }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
+    }).then((res) => res.json());
   };
 
   return (
