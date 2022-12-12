@@ -6,7 +6,7 @@ import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import BoxStyle from '../../../styles/Box.style';
 
 const ListItem = ({ list, setListArr }) => {
-  const { id, todo, isCompleted, userId } = list;
+  const { id, todo, isCompleted } = list;
   const [checked, setChecked] = useState(isCompleted);
   const [input, setInput] = useState(todo);
   const [modifyingInput, setModifyingInput] = useState(todo);
@@ -16,8 +16,6 @@ const ListItem = ({ list, setListArr }) => {
   useEffect(() => {
     if (inputRef.current !== null) inputRef.current.focus();
   }, [isModifying]);
-
-  // list.todo === 'check' && console.log(checked.toString());
 
   const clickCheckBox = () => {
     if (!isModifying) {
@@ -45,62 +43,52 @@ const ListItem = ({ list, setListArr }) => {
       <BoxStyle className='list-item'>
         <div className='checkbox' onClick={clickCheckBox}>
           <FontAwesomeIcon icon={faSquareCheck} className='icon' />
-          {!isModifying && (
-            <input
-              defaultValue={input}
-              className={`content ${checked.toString()} ${
-                isModifying && 'modifying'
-              }`}
-              disabled={true}
-            />
-          )}
-          {isModifying && (
-            <input
-              ref={inputRef}
-              type='text'
-              className={`content ${checked.toString()} ${
-                isModifying && 'modifying'
-              }`}
-              value={modifyingInput}
-              onChange={handleInput}
-              disabled={isModifying ? false : true}
-              autoComplete='off'
-              size={20}
-              maxLength={12}
-              spellCheck='false'
-            />
+          <input
+            ref={inputRef}
+            type='text'
+            className={`content ${checked.toString()} ${
+              isModifying && 'modifying'
+            }`}
+            value={isModifying ? modifyingInput : input}
+            onChange={handleInput}
+            disabled={isModifying ? false : true}
+            autoComplete='off'
+            size={20}
+            maxLength={12}
+            spellCheck='false'
+          />
+        </div>
+        <div>
+          {isModifying ? (
+            <>
+              <button
+                className='save-modify'
+                onClick={() => {
+                  setModifyingInput(input);
+                  setIsModifying(false);
+                }}>
+                취소
+              </button>
+              <button
+                className='save-modify'
+                onClick={() => {
+                  setInput(modifyingInput);
+                  setIsModifying(false);
+                }}>
+                제출
+              </button>
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon
+                onClick={() => setIsModifying(true)}
+                icon={faPencil}
+                className={`icon small ${checked}`}
+              />
+              <FontAwesomeIcon icon={faTrashCan} className='icon small' />
+            </>
           )}
         </div>
-        {!isModifying && (
-          <div>
-            <FontAwesomeIcon
-              onClick={() => setIsModifying(true)}
-              icon={faPencil}
-              className={`icon small ${checked}`}
-            />
-            <FontAwesomeIcon icon={faTrashCan} className='icon small' />
-          </div>
-        )}
-        {isModifying && (
-          <div>
-            <button
-              className='save-modify'
-              onClick={() => {
-                setModifyingInput(input);
-                setIsModifying(false);
-              }}>
-              취소
-            </button>
-            <button
-              className='save-modify'
-              onClick={() => {
-                setInput(modifyingInput);
-                setIsModifying(false);
-              }}>
-              제출
-            </button>
-          </div>
-        )}
       </BoxStyle>
     </ListContainer>
   );
@@ -123,6 +111,14 @@ const ListContainer = styled.div`
   .small {
     font-size: ${(props) => props.theme.size.iconRight};
     margin: 0px 20px 0px 0px;
+  }
+  .save-modify {
+    padding: 0px;
+    margin: 0px 15px 0px 0px;
+    font-size: 16px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   input {
     color: ${(props) => props.theme.color.txt};
