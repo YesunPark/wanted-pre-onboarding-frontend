@@ -1,18 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import SignupLoginForm from '../../styles/SignupLoginForm.style';
 
 const Login = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({ emailInput: '', pwInput: '' });
-
-  const handleInputValue = (e) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
+  const { emailInput, pwInput } = input;
 
   const clickLoginBtn = () => {
     fetch('https://pre-onboarding-selection-task.shop/auth/signin', {
@@ -33,30 +26,16 @@ const Login = () => {
   };
 
   return (
-    <LoginContainer>
-      <input
-        name='emailInput'
-        placeholder='이메일'
-        value={input.emailInput}
-        onChange={handleInputValue}
-      />
-      <input
-        name='pwInput'
-        placeholder='비밀번호'
-        value={input.pwInput}
-        onChange={handleInputValue}
-      />
-      <button onClick={clickLoginBtn}>로그인</button>
-    </LoginContainer>
+    <SignupLoginForm
+      title='로그인'
+      input={input}
+      setInput={setInput}
+      email={emailInput}
+      pw={pwInput}
+      btnTxt='로그인하기'
+      btnClick={clickLoginBtn}
+    />
   );
 };
-
-const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 370px;
-  height: 600px;
-  background-color: #ffffff;
-`;
 
 export default Login;

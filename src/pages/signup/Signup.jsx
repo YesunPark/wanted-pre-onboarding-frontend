@@ -1,16 +1,9 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import SignupLoginForm from '../../styles/SignupLoginForm.style';
 
 const Signup = () => {
   const [input, setInput] = useState({ emailInput: '', pwInput: '' });
-
-  const handleInputValue = (e) => {
-    const { name, value } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
+  const { emailInput, pwInput } = input;
 
   const clickSignupBtn = () => {
     fetch('https://pre-onboarding-selection-task.shop/auth/signup', {
@@ -26,30 +19,16 @@ const Signup = () => {
   };
 
   return (
-    <SignupContainer>
-      <input
-        name='emailInput'
-        placeholder='이메일을 입력하세요. (@포함)'
-        value={input.emailInput}
-        onChange={handleInputValue}
-      />
-      <input
-        name='pwInput'
-        placeholder='비밀번호를 입력하세요. (8자 이상)'
-        value={input.pwInput}
-        onChange={handleInputValue}
-      />
-      <button onClick={clickSignupBtn}>회원가입하기</button>
-    </SignupContainer>
+    <SignupLoginForm
+      title='회원가입'
+      input={input}
+      setInput={setInput}
+      email={emailInput}
+      pw={pwInput}
+      btnTxt='회원가입하기'
+      btnClick={clickSignupBtn}
+    />
   );
 };
-
-const SignupContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 370px;
-  height: 600px;
-  background-color: #ffffff;
-`;
 
 export default Signup;
