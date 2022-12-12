@@ -3,7 +3,7 @@ import { faLemon } from '@fortawesome/free-solid-svg-icons';
 import BoxStyle from './styles/Box.style';
 import { theme } from './styles/theme';
 
-function Title() {
+const Title = () => {
   return (
     <BoxStyle bgColor={theme.color.mainBg} className='title'>
       <div>
@@ -12,6 +12,6 @@ function Title() {
       </div>
     </BoxStyle>
   );
-}
+};
 
 export default Title;

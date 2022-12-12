@@ -34,9 +34,9 @@ const ListItem = ({ list, listArr, setListArr }) => {
     }
   };
 
-  function handleInput(e) {
+  const handleInput = (e) => {
     setModifyingInput(e.target.value);
-  }
+  };
 
   const clickDeleteBtn = () => {
     fetch(`https://pre-onboarding-selection-task.shop/todos/${id}`, {

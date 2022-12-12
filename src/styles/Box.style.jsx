@@ -1,13 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
 
-function BoxStyle({ bgColor, className, children }) {
+const BoxStyle = ({ bgColor, className, children }) => {
   return (
     <TitleContainer color={bgColor} className={className}>
       {children}
     </TitleContainer>
   );
-}
+};
 
 const TitleContainer = styled.div`
   display: flex;

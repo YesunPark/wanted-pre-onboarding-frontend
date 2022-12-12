@@ -5,7 +5,7 @@ import { faLemon } from '@fortawesome/free-solid-svg-icons';
 import BoxStyle from '../../../styles/Box.style';
 import { theme } from '../../../styles/theme';
 
-function MakeTodo({ listArr, setListArr }) {
+const MakeTodo = ({ listArr, setListArr }) => {
   const [inputToDo, setInputToDo] = useState('');
   const inputRef = useRef(null);
 
@@ -13,7 +13,7 @@ function MakeTodo({ listArr, setListArr }) {
     setInputToDo(e.target.value);
   }
 
-  function clickSaveBtn() {
+  const clickSaveBtn = () => {
     fetch('https://pre-onboarding-selection-task.shop/todos', {
       method: 'POST',
       headers: {
@@ -30,7 +30,7 @@ function MakeTodo({ listArr, setListArr }) {
         setListArr([...listArr, { id, isCompleted, todo, userId }]);
       });
     setInputToDo('');
-  }
+  };
 
   return (
     <MakeTodoContainer>
@@ -60,7 +60,7 @@ function MakeTodo({ listArr, setListArr }) {
       </BoxStyle>
     </MakeTodoContainer>
   );
-}
+};
 
 const MakeTodoContainer = styled.div`
   display: flex;
