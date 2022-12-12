@@ -2,16 +2,19 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Title from './components/Title';
 import ListItem from './components/ListItem';
+import MakeTodo from './components/MakeTodo';
 
 const ToDo = () => {
-  const [listArr, setListArr] = useState([{ id: 1, todo: 'hi' }]);
+  const [listArr, setListArr] = useState([]);
 
   return (
     <TodoContainer>
       <Title />
-      {listArr.map((list) => {
-        return <ListItem key={list.id} list={list} setListArr={setListArr} />;
-      })}
+      {!!listArr.length &&
+        listArr.map((list) => {
+          return <ListItem key={list.id} list={list} setListArr={setListArr} />;
+        })}
+      <MakeTodo listArr={listArr} setListArr={setListArr} />
     </TodoContainer>
   );
 };
