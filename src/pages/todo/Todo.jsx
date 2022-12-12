@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Title from './components/Title';
 import ListItem from './components/ListItem';
@@ -6,6 +6,19 @@ import MakeTodo from './components/MakeTodo';
 
 const ToDo = () => {
   const [listArr, setListArr] = useState([]);
+
+  useEffect(() => {
+    fetch('https://pre-onboarding-selection-task.shop/todos', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setListArr(res);
+      });
+  }, []);
 
   return (
     <TodoContainer>
