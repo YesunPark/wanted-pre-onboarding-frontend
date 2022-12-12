@@ -27,7 +27,12 @@ const ToDo = () => {
         {!!listArr.length &&
           listArr.map((list) => {
             return (
-              <ListItem key={list.id} list={list} setListArr={setListArr} />
+              <ListItem
+                key={list.id}
+                list={list}
+                listArr={listArr}
+                setListArr={setListArr}
+              />
             );
           })}
       </ListContainer>

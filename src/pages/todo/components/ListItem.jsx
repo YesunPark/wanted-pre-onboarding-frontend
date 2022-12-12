@@ -5,7 +5,7 @@ import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import BoxStyle from '../../../styles/Box.style';
 
-const ListItem = ({ list, setListArr }) => {
+const ListItem = ({ list, listArr, setListArr }) => {
   const { id, todo, isCompleted } = list;
   const [checked, setChecked] = useState(isCompleted);
   const [input, setInput] = useState(todo);
@@ -37,6 +37,20 @@ const ListItem = ({ list, setListArr }) => {
   function handleInput(e) {
     setModifyingInput(e.target.value);
   }
+
+  const clickDeleteBtn = () => {
+    fetch(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }).then(() => {
+      const newListArr = listArr.filter((list) => {
+        return list.id !== id;
+      });
+      setListArr(newListArr);
+    });
+  };
 
   return (
     <ListContainer id={checked.toString()}>
@@ -85,7 +99,11 @@ const ListItem = ({ list, setListArr }) => {
                 icon={faPencil}
                 className={`icon small ${checked}`}
               />
-              <FontAwesomeIcon icon={faTrashCan} className='icon small' />
+              <FontAwesomeIcon
+                onClick={clickDeleteBtn}
+                icon={faTrashCan}
+                className='icon small'
+              />
             </>
           )}
         </div>
