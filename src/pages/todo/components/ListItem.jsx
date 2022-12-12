@@ -38,6 +38,20 @@ const ListItem = ({ list, listArr, setListArr }) => {
     setModifyingInput(e.target.value);
   };
 
+  const clickModifySubmitBtn = () => {
+    fetch(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        todo: modifyingInput,
+        isCompleted: false,
+      }),
+    }).then((res) => res.json());
+  };
+
   const clickDeleteBtn = () => {
     fetch(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
       method: 'DELETE',
@@ -86,6 +100,7 @@ const ListItem = ({ list, listArr, setListArr }) => {
               <button
                 className='save-modify'
                 onClick={() => {
+                  clickModifySubmitBtn();
                   setInput(modifyingInput);
                   setIsModifying(false);
                 }}>
