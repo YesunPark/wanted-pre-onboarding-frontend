@@ -7,7 +7,7 @@ import BoxStyle from '../../../styles/Box.style';
 
 const ListItem = ({ list, setListArr }) => {
   const { id, todo, isCompleted, userId } = list;
-  const [checked, setChecked] = useState('no-checked');
+  const [checked, setChecked] = useState(isCompleted);
   const [input, setInput] = useState(todo);
   const [modifyingInput, setModifyingInput] = useState(todo);
   const [isModifying, setIsModifying] = useState(false);
@@ -17,21 +17,50 @@ const ListItem = ({ list, setListArr }) => {
     if (inputRef.current !== null) inputRef.current.focus();
   }, [isModifying]);
 
+  // list.todo === 'check' && console.log(checked.toString());
+
+  const clickCheckBox = () => {
+    if (!isModifying) {
+      checked ? setChecked(false) : setChecked(true);
+      fetch(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          todo: input,
+          isCompleted: checked ? false : true,
+        }),
+      }).then((res) => res.json());
+    }
+  };
+
   function handleInput(e) {
     setModifyingInput(e.target.value);
   }
 
   return (
-    <ListContainer id={checked}>
+    <ListContainer id={checked.toString()}>
       <BoxStyle className='list-item'>
-        <div className='checkbox'>
+        <div className='checkbox' onClick={clickCheckBox}>
           <FontAwesomeIcon icon={faSquareCheck} className='icon' />
-          {!isModifying && <input defaultValue={input} disabled={true} />}
+          {!isModifying && (
+            <input
+              defaultValue={input}
+              className={`content ${checked.toString()} ${
+                isModifying && 'modifying'
+              }`}
+              disabled={true}
+            />
+          )}
           {isModifying && (
             <input
               ref={inputRef}
               type='text'
-              className={`content ${checked} ${isModifying && 'modifying'}`}
+              className={`content ${checked.toString()} ${
+                isModifying && 'modifying'
+              }`}
               value={modifyingInput}
               onChange={handleInput}
               disabled={isModifying ? false : true}
@@ -78,33 +107,23 @@ const ListItem = ({ list, setListArr }) => {
 };
 
 const ListContainer = styled.div`
+  .content {
+    color: ${(props) => props.id === 'true' && props.theme.color.grayTxt};
+    text-decoration: ${(props) => props.id === 'true' && 'line-through'};
+  }
   .icon {
-    color: ${(props) => props.id === 'checked' && '#91D086'};
-    &.checked {
+    color: ${(props) => props.id === 'true' && '#91D086'};
+    &.true {
       display: none;
     }
     &:hover {
       cursor: pointer;
     }
   }
-  .content {
-    color: ${(props) => props.id === 'checked' && props.theme.color.grayTxt};
-    text-decoration: ${(props) => props.id === 'checked' && 'line-through'};
-  }
   .small {
     font-size: ${(props) => props.theme.size.iconRight};
     margin: 0px 20px 0px 0px;
   }
-  .save-modify {
-    height: 40px;
-    padding: 0px;
-    margin-right: 15px;
-    font-size: 16px;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
   input {
     color: ${(props) => props.theme.color.txt};
     font-size: 18px;
