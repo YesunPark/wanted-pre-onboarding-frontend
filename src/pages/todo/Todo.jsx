@@ -23,10 +23,14 @@ const ToDo = () => {
   return (
     <TodoContainer>
       <Title />
-      {!!listArr.length &&
-        listArr.map((list) => {
-          return <ListItem key={list.id} list={list} setListArr={setListArr} />;
-        })}
+      <ListContainer>
+        {!!listArr.length &&
+          listArr.map((list) => {
+            return (
+              <ListItem key={list.id} list={list} setListArr={setListArr} />
+            );
+          })}
+      </ListContainer>
       <MakeTodo listArr={listArr} setListArr={setListArr} />
     </TodoContainer>
   );
@@ -37,6 +41,11 @@ const TodoContainer = styled.section`
   width: 370px;
   height: 650px;
   background-color: #ffffff;
+`;
+
+const ListContainer = styled.div`
+  height: 520px;
+  overflow-y: auto;
 `;
 
 export default ToDo;
