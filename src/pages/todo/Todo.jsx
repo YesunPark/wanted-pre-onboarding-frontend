@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Title from './components/Title';
 import ListItem from './components/ListItem';
 import MakeTodo from './components/MakeTodo';
 
@@ -22,7 +21,6 @@ const ToDo = () => {
 
   return (
     <TodoContainer>
-      <Title />
       <ListContainer>
         {!!listArr.length &&
           listArr.map((list) => {
@@ -44,7 +42,7 @@ const ToDo = () => {
 const TodoContainer = styled.section`
   position: relative;
   width: 370px;
-  height: 650px;
+  height: 600px;
   background-color: #ffffff;
 `;
 

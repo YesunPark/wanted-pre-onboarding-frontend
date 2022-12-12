@@ -52,7 +52,7 @@ const SignupContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 370px;
-  height: 650px;
+  height: 600px;
   background-color: #ffffff;
 `;
 
