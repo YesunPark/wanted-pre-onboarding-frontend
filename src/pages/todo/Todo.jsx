@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ListItem from './components/ListItem';
 import MakeTodo from './components/MakeTodo';
 
 const ToDo = () => {
+  const navigate = useNavigate();
   const [listArr, setListArr] = useState([]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      alert('로그인이 필요한 기능입니다.');
+      navigate('/');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     fetch('https://pre-onboarding-selection-task.shop/todos', {
@@ -14,9 +23,7 @@ const ToDo = () => {
       },
     })
       .then((res) => res.json())
-      .then((res) => {
-        setListArr(res);
-      });
+      .then((res) => setListArr(res));
   }, []);
 
   return (
