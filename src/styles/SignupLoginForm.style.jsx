@@ -39,7 +39,7 @@ const SignupLoginForm = ({
         <button onClick={btnClick}>{btnTxt}</button>
       </div>
       <Link className='link' to={title === '로그인' ? '/signup' : '/'}>
-        {title === '로그인' ? '회원가입' : '로그인'} 페이지로 이동
+        {title === '로그인' ? '회원가입' : '로그인'}
       </Link>
     </FormContainer>
   );
