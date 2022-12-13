@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignupLoginForm = ({
@@ -37,6 +38,9 @@ const SignupLoginForm = ({
       <div className='btn-box'>
         <button onClick={btnClick}>{btnTxt}</button>
       </div>
+      <Link className='link' to={title === '로그인' ? '/signup' : '/'}>
+        {title === '로그인' ? '회원가입' : '로그인'} 페이지로 이동
+      </Link>
     </FormContainer>
   );
 };
@@ -50,10 +54,12 @@ const FormContainer = styled.div`
   height: 600px;
   padding: 0 15%;
   background-color: #ffffff;
+
   .title {
     margin-bottom: 40px;
-    font-size: 23px;
+    font-size: 25px;
   }
+
   div {
     display: flex;
     justify-content: center;
@@ -79,6 +85,7 @@ const FormContainer = styled.div`
         }
       }
     }
+
     input,
     button {
       width: 100%;
@@ -86,6 +93,12 @@ const FormContainer = styled.div`
       border: 1px solid ${(props) => props.theme.color.main};
       border-radius: 3px;
     }
+  }
+
+  .link {
+    margin: 20px 0 80px;
+    color: ${(props) => props.theme.color.txt};
+    font-size: 13px;
   }
 `;
 
