@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLemon } from '@fortawesome/free-solid-svg-icons';
-import BoxStyle from './styles/Box.style';
-import { theme } from './styles/theme';
+import BoxStyle from './Box.style';
+import { theme } from '../styles/theme';
 
 const Title = () => {
   return (

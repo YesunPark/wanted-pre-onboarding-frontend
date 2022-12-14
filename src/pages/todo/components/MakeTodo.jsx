@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLemon } from '@fortawesome/free-solid-svg-icons';
-import BoxStyle from '../../../styles/Box.style';
+import BoxStyle from '../../../components/Box.style';
 import { theme } from '../../../styles/theme';
 
 const MakeTodo = ({ listArr, setListArr }) => {

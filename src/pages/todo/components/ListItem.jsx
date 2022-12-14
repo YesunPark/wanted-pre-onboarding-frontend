@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import BoxStyle from '../../../styles/Box.style';
+import BoxStyle from '../../../components/Box.style';
 
 const ListItem = ({ list, listArr, setListArr }) => {
   const { id, todo, isCompleted } = list;
