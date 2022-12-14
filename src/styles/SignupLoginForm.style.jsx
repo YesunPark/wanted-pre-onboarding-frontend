@@ -1,7 +1,16 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignupLoginForm = ({ title, input, setInput, btnTxt, btnClick }) => {
+  const [btnDisabled, setBtnDisabled] = useState(true);
+
+  useEffect(() => {
+    const emailValid = input.emailInput.includes('@');
+    const pwValid = input.pwInput.length >= 8 ? true : false;
+    emailValid && pwValid ? setBtnDisabled(false) : setBtnDisabled(true);
+  }, [input]);
+
   const handleInputValue = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -28,7 +37,9 @@ const SignupLoginForm = ({ title, input, setInput, btnTxt, btnClick }) => {
         />
       </div>
       <div className='btn-box'>
-        <button onClick={btnClick}>{btnTxt}</button>
+        <button onClick={btnClick} disabled={btnDisabled}>
+          {btnTxt}
+        </button>
       </div>
       <Link className='link' to={title === '로그인' ? '/signup' : '/'}>
         {title === '로그인' ? '회원가입' : '로그인'}
@@ -74,6 +85,10 @@ const FormContainer = styled.div`
         background-color: ${(props) => props.theme.color.main};
         &:hover {
           cursor: pointer;
+        }
+        &:disabled {
+          border-color: ${(props) => props.theme.color.mainBg};
+          background-color: ${(props) => props.theme.color.mainBg};
         }
       }
     }
