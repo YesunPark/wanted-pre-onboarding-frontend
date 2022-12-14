@@ -12,7 +12,7 @@ const Login = () => {
       alert('이미 로그인하셨습니다\nTodo리스트로 이동합니다.');
       navigate('/todo');
     }
-  });
+  }, [navigate]);
 
   const clickLoginBtn = () => {
     fetch('https://pre-onboarding-selection-task.shop/auth/signin', {
@@ -27,8 +27,12 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        localStorage.setItem('token', res.access_token);
-        navigate('/todo');
+        if (res.message) {
+          alert('해당 사용자가 존재하지 않습니다.');
+        } else if (res.access_token) {
+          localStorage.setItem('token', res.access_token);
+          navigate('/todo');
+        }
       });
   };
 
