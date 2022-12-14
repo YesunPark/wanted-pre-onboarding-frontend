@@ -37,8 +37,6 @@ const Signup = () => {
       title='회원가입'
       input={input}
       setInput={setInput}
-      email={emailInput}
-      pw={pwInput}
       btnTxt='회원가입하기'
       btnClick={clickSignupBtn}
     />

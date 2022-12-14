@@ -37,8 +37,6 @@ const Login = () => {
       title='로그인'
       input={input}
       setInput={setInput}
-      email={emailInput}
-      pw={pwInput}
       btnTxt='로그인하기'
       btnClick={clickLoginBtn}
     />

@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SignupLoginForm = ({
-  title,
-  input,
-  setInput,
-  email,
-  pw,
-  btnTxt,
-  btnClick,
-}) => {
+const SignupLoginForm = ({ title, input, setInput, btnTxt, btnClick }) => {
   const handleInputValue = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -25,13 +17,13 @@ const SignupLoginForm = ({
         <input
           name='emailInput'
           placeholder='이메일을 입력하세요. (@포함)'
-          value={email}
+          value={input.emailInput}
           onChange={handleInputValue}
         />
         <input
           name='pwInput'
           placeholder='비밀번호를 입력하세요. (8자 이상)'
-          value={pw}
+          value={input.pwInput}
           onChange={handleInputValue}
         />
       </div>
