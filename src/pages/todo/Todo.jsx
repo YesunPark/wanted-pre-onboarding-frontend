@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import EmptyList from './components/EmptyList';
 import ListItem from './components/ListItem';
 import MakeTodo from './components/MakeTodo';
 
@@ -23,12 +24,16 @@ const ToDo = () => {
       },
     })
       .then((res) => res.json())
-      .then((res) => setListArr(res));
+      .then((res) => {
+        setListArr(res);
+        console.log(res);
+      });
   }, []);
 
   return (
     <TodoContainer>
       <ListContainer>
+        {!listArr.length && <EmptyList />}
         {!!listArr.length &&
           listArr.map((list) => {
             return (
