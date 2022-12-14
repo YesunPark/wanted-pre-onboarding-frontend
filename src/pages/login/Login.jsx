@@ -29,6 +29,7 @@ const Login = () => {
       .then((res) => {
         if (res.message) {
           alert('해당 사용자가 존재하지 않습니다.');
+          setInput({ emailInput: '', pwInput: '' });
         } else if (res.access_token) {
           localStorage.setItem('token', res.access_token);
           navigate('/todo');
