@@ -7,6 +7,8 @@
 로그인/ 회원가입/ 투두리스트 3개의 페이지로 이루어져 있습니다.\
 투두리스트는 로그인 한 유저만 사용가능하기 때문에 회원가입, 로그인 후에 이용하실 수 있습니다.
 
+> TEST- ID: `wanted@test.com` PW: `12121212`
+
 ## 🍋기술 스택
 `React`, `Javascript`, `React-Router-Dom`, `styled-components`, `styled-reset`, `fontawesome`
 
@@ -100,10 +102,10 @@ https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc
 
 ## 🍋추가로 신경 쓴 부분
 >1. 함수, 변수명의 가독성을 신경썼습니다.
-- 타인이 봤을 때 함수의 내용을 일일히 이해하거나 변수가 사용되는 곳을 찾아가지 않더라도 어떤 역할을 하는 것인지 바로 알 수 있도록 함수명, 변수명을 신경썼습니다.
-- 주로 `어떤 동작을 뜻하는 동사`+ `요소의 자세한 의미를 포함하는 명사`로 구분했습니다.
-https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L20
-https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L41
-https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/login/Login.jsx#L17
-https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L9-L14
+>- 타인이 봤을 때 함수의 내용을 일일히 이해하거나 변수가 사용되는 곳을 찾아가지 않더라도 어떤 역할을 하는 것인지 바로 알 수 있도록 함수명, 변수명을 신경썼습니다.
+>- 주로 `어떤 동작을 뜻하는 동사`+ `요소의 자세한 의미를 포함하는 명사`로 구분했습니다.
+>https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L20
+>https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L41
+>https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/login/Login.jsx#L17
+>https://github.com/YesunPark/wanted-pre-onboarding-frontend/blob/2ae2b9d0fd65bbc5cf65bc9b0ea24d8a7fd5740c/src/pages/todo/components/ListItem.jsx#L9-L14
 
